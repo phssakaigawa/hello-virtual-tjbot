@@ -1,0 +1,357 @@
+<section>
+
+<p>theme : “simple”<br>
+transition: “slide”<br>
+highlightTheme: “monokai”<br>
+logoImg: “img/ch08/tjbot.png”<br>
+slideNumber: true<br>
+title: “Hello, Virtual TJBot”</p>
+
+</section>
+<section>
+
+<h1>Hello, Virtual TJBot</h1>
+
+<p>BMXUG TJBotFan</p>
+
+<p>IBM Champion</p>
+
+<p>Shoichiro Sakaigawa /  @l_s_s_l</p>
+
+</section>
+<section>
+
+<h1>What’s Virtual TJBot</h1>
+
+<p>物理のTJBotを手に入れる前に試したい・実機ハンズオンでTJBotは無いけど同等のコマンドが試せないかということで<br>
+Node-REDのフローエディタ上で動作するVirtual TJBotを紹介します。</p>
+
+</section>
+<section>
+
+<p>このプレゼンテーションでは、Node-REDの構築からVirtual TJBotの設定までを自動的に行うことができる<code>Virutal-TJBot-Starter</code>というパッケージを利用します。</p>
+
+<h3><a href="https://bit.ly/virtualTJBot">https://bit.ly/virtualTJBot</a></h3>
+
+</section>
+<section>
+
+<h2>どうやって動いているの？</h2>
+
+<p>Virtual TJBotは、Node-REDのVirutal TJBotノードを利用して稼働しています。</p>
+
+<p>ここで紹介するのはIBM Cloud上のCloud Foundry Node.jsサービスを利用したNode-REDのプラットフォーム上へ自動設定を行う方法です。</p>
+
+<p>この設定自動化によりどなたでもかんたんにハンズオン同等の環境を構築することが可能となります。</p>
+
+</section>
+<section>
+
+<h2>前提条件</h2>
+
+<ul>
+  <li>IBM Cloudライトアカウントもしくはそれ以上が必要</li>
+  <li>過去にNode-REDをIBM Cloudで立ち上げたことが無いこと
+    <ul>
+      <li>このハンズオン中に過去Node-REDを動かしたことがある方は個別にご相談ください</li>
+    </ul>
+  </li>
+  <li>PCからアクセスすること
+    <ul>
+      <li>設定完了後はお好きなNode-REDのフローエディタが動けばどこでも問題ありません</li>
+    </ul>
+  </li>
+</ul>
+
+</section>
+<section>
+
+<h2>設定方法</h2>
+
+<p>１. Virtual TJBot Starter Applicationのページへアクセスする</p>
+
+<p><a href="https://bit.ly/virtualTJBot">https://bit.ly/virtualTJBot</a></p>
+
+<p><img src="./img/ch08/ch08-virtualTJBot-01.png" alt=""></p>
+
+</section>
+<section>
+
+<p>２． <code>Deploy to IBM Cloud</code>ボタンをクリックする</p>
+
+<p>３． IBM Cloudへログインしていない場合はここでログインを行う</p>
+
+<p><img src="./img/ch08/ch08-virtualTJBot-02.png" alt=""></p>
+
+</section>
+<section>
+
+<p>４． IBM Cloudへのセットアップ画面になります。<br>
+ツールチェーン名などは、今回デフォルトのまま進みます。</p>
+
+<p><img src="./img/ch08/ch08-virtualTJBot-03.png" alt=""></p>
+
+</section>
+<section>
+
+<p>※Note：<br>
+ツールチェーンとは、gitやDelivery Pipelineという設定自動化を行うCI/CDツールが動くようセットアップされるグループをさします。<br>
+IBM Cloudツールチェーンは、DevOps項目から利用ができ、PaaS環境のセットアップやkubernetes環境へのアプリケーション配布などができる仕組みです。</p>
+
+</section>
+<section>
+
+<p>５． 必須設定項目の<code>Delivery Pipeline</code>をクリックします。</p>
+
+<p>６． <code>IBM Cloud APIキー：</code>と書かれた項目が現在空欄となっています。<br>
+この項目はみなさんのIBM Cloudカウントそれぞれに紐づく内容のため、<br>
+<code>作成</code>ボタンをクリックして生成します。</p>
+
+<p><img src="./img/ch08/ch08-virtualTJBot-04.png" alt=""></p>
+
+</section>
+<section>
+
+<p>７． APIキーを新規作成するにあたり警告が表示されます。<br>
+この手順ではクラウドのサービスを自動的に作成する権限を持つAPIキー（合言葉）を作成・登録することになります。<br>
+細かくこの合言葉に対して許可する範囲をIAMという機能で設定が可能です。<br>
+今回は自動的にIBM Cloudのサービスを一部作成するため、<br>
+このまま<code>作成</code>をクリックします。</p>
+
+<p><img src="./img/ch08/ch08-virtualTJBot-05.png" alt=""></p>
+
+</section>
+<section>
+
+<p>８． <code>IBM Cloud APIキー:</code>の項目、<code>リージョン</code>、<code>組織</code>、<code>スペース</code>が埋まったことを確認して、画面上部の<code>作成</code>をクリックします</p>
+
+<p><img src="./img/ch08/ch08-virtualTJBot-06.png" alt=""></p>
+
+</section>
+<section>
+
+<p>９．これでVirtual TJBotを起動する準備ができました。<br>
+画面中央の<code>Delivery Pipeline</code>をクリックして完了状態を確認しましょう。</p>
+
+<p><img src="./img/ch08/ch08-virtualTJBot-07.png" alt=""></p>
+
+</section>
+<section>
+
+<h2>失敗してしまった</h2>
+
+</section>
+<section>
+
+<p>１０． 失敗してしまう場合は・・・</p>
+
+<p>Deployの項目にある再生ボタンをクリックします。</p>
+
+<p><img src="./img/ch08/ch08-virtualTJBot-08.png" alt=""></p>
+
+</section>
+<section>
+
+<p>※失敗する理由：</p>
+
+<p>さまざまな理由が考えられますが、IBM Cloud内での処理プロセスのなかでタイムアウトなどが起こりエラーが発生する場合があります。３回ほど試しても進まない場合は、スタッフへご相談ください</p>
+
+</section>
+<section>
+
+<p>１１． 設定の完了<br>
+Deployの項目が緑になり、<code>ステージは成功</code>となったら完了です。</p>
+
+<p><img src="./img/ch08/ch08-virtualTJBot-09.png" alt=""></p>
+
+<p>１２． ブラウザの戻るボタンで戻り、画面上部の<code>アプリURLにアクセス</code>をクリックします。</p>
+
+</section>
+<section>
+
+<p>１３． Node-REDの初期ウィザードが表示されます。<code>Next</code>をクリックします。</p>
+
+<p><img src="./img/ch08/ch08-virtualTJBot-10.png" alt=""></p>
+
+</section>
+<section>
+
+<p>１４． Node-REDのフローエディタをアクセスする際に必要なUsernameとPasswordを決めて、<code>Next</code>をクリックします。<br><br>
+※チェックボックスにチェックを入れると、フローエディタを読み取り専用で開くことができるようになります。</p>
+
+<p><img src="./img/ch08/ch08-virtualTJBot-11.png" alt=""></p>
+
+</section>
+<section>
+
+<p>１５． <code>Next</code>をクリックします</p>
+
+<p>ここでは詳細を説明しませんが、アプリケーション稼働状況（CPU/メモリなど）を表示する場合はURLを控えてチェックをオンにします。</p>
+
+<p><img src="./img/ch08/ch08-virtualTJBot-12.png" alt=""></p>
+
+</section>
+<section>
+
+<p>１６． IBM CloudとNode-REDを組み合わせて使うにあたり便利なNodeの紹介です。<br>
+ここでは何もせず<code>Next</code>をクリックします</p>
+
+<p><img src="./img/ch08/ch08-virtualTJBot-13.png" alt=""></p>
+
+</section>
+<section>
+
+<p>１７． <code>Finish</code>をクリックしてインストールの完了です。</p>
+
+<p><img src="./img/ch08/ch08-virtualTJBot-14.png" alt=""></p>
+
+</section>
+<section>
+
+<h2>操作編</h2>
+
+</section>
+<section>
+
+<p>１． 設定作業が完了すると、ログイン手前の画面が表示されます。<br>
+この画面がログインURLになるので、適宜ブックマークなどしておくと良いでしょう。<br>
+<code>Go to your Node-RED flow editor</code>ボタンをクリックして進みます。</p>
+
+<p><img src="./img/ch08/ch08-virtualTJBot-use-01.png" alt=""></p>
+
+</section>
+<section>
+
+<p>２．設定編で設定したUsernameとPasswordを入力して<code>ログイン</code>をクリックします。</p>
+
+<p><img src="./img/ch08/ch08-virtualTJBot-use-02.png" alt=""></p>
+
+</section>
+<section>
+
+<p>３．フローエディタが表示されます。</p>
+
+<p><img src="./img/ch08/ch08-virtualTJBot-use-03.png" alt=""></p>
+
+</section>
+<section>
+
+<p>４．Virtual TJBotのパネルを開きます。<br>
+画面右上の▼記号をクリックして、Virtual TJBotをクリックします。</p>
+
+<p><img src="./img/ch08/ch08-virtualTJBot-use-04.png" alt=""></p>
+
+</section>
+<section>
+
+<p>５．Sampleタブの<code>(2) Blink LED</code>のフローが自動で起動して、色が順番に変わっていきます。</p>
+
+<p><img src="./img/ch08/ch08-virtualTJBot-use-05.png" alt=""></p>
+
+</section>
+<section>
+
+<h2>Virtual TJBotと物理のTJBotとの違い</h2>
+
+<p>ここまででVirtual TJBotの起動について紹介しました。</p>
+
+<p>TJBotFanのハンズオンで使用されているNode-REDフローが、<br>
+Virtual TJBot版に移植されています。</p>
+
+<p>ここでは、物理のTJBotで実現していたものを、<br>
+Virtual TJBotではどのように置き換えをしているのか差分を紹介します。</p>
+
+</section>
+<section>
+
+<h3>ハンズオンフローの対比表</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">物理版</th>
+      <th style="text-align: left">VirtualTJBot</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">IPアドレスをしゃべる</td>
+      <td style="text-align: left">廃止</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">カメラで人物判定</td>
+      <td style="text-align: left">opencv機能から、Watson VisualRecognitionに変更</td>
+    </tr>
+  </tbody>
+</table>
+
+</section>
+<section>
+
+<h3>ノードの対比表</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">物理版</th>
+      <th style="text-align: left">VirtualTJBot</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">take photo node</td>
+      <td style="text-align: left">see ノードを組み合わせたフローに変更(ブラウザからWebカメラを使用)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">control led(GPIO)</td>
+      <td style="text-align: left">shine ノードに変更（Virtual TJBotタブで頭が光る)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">control arm(GPIO)</td>
+      <td style="text-align: left">waveノードに変更（Virtual TJBotタブで手を振る）</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">open jtalk</td>
+      <td style="text-align: left">Play audioに変更(端末OSの音声合成機能に依存)</td>
+    </tr>
+  </tbody>
+</table>
+
+</section>
+<section>
+
+<h2>ここまででVirtual TJBotのセットアップと說明は終了です。</h2>
+
+<h2>おうちでもぜひTJBotと遊んでみてください</h2>
+
+</section>
+<section>
+
+<h2>告知1</h2>
+
+<h3>TJBotFANグループ：</h3>
+
+<h3><a href="https://tjbotfan.tokyo">https://tjbotfan.tokyo</a></h3>
+
+<p>Facebook / Twitterなども↑から</p>
+
+</section>
+<section>
+
+<h2>告知2</h2>
+
+<h3>技術書典7 に出店します（し23D）</h3>
+
+<p><img src="tbf7.png" alt=""></p>
+
+<h4>基礎編：TJBot組立から操作まで</h4>
+<h4>応用編：TJBotのカスタマイズ</h4>
+
+</section>
+<section>
+
+<h2>Thanks! <br> have a fun TJBot!!</h2>
+
+<p><img src="img/ch08/tjbot.png" alt=""></p>
+
+</section>
